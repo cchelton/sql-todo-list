@@ -12,6 +12,16 @@ $(document).ready(() => {
     clickCompleteBtn
   );
   $(".js-tbody-outputTasks").on("click", ".js-btn-taskDelete", clickDeleteBtn);
+  $(".js-tbody-outputCompleted").on(
+    "click",
+    ".js-btn-taskComplete",
+    clickCompleteBtn
+  );
+  $(".js-tbody-outputCompleted").on(
+    "click",
+    ".js-btn-taskDelete",
+    clickDeleteBtn
+  );
 });
 
 //
@@ -141,14 +151,25 @@ function deleteTask(id) {
  */
 function renderTasks() {
   $(".js-tbody-outputTasks").empty();
+  $(".js-tbody-outputCompleted").empty();
   for (let item of tasks) {
-    $(".js-tbody-outputTasks").append(`
-    <tr>
-        <td>${item.task}</td>
-        <td><button class="js-btn-taskComplete" data-id="${item.id}" data-complete="${item.completed}">complete</button></td>
-        <td><button class="js-btn-taskDelete" data-id="${item.id}">delete</button></td>
-    </tr>
-    `);
+    if (!item.completed) {
+      $(".js-tbody-outputTasks").append(`
+        <tr>
+            <td>${item.task}</td>
+            <td><button class="js-btn-taskComplete" data-id="${item.id}" data-complete="${item.completed}">complete</button></td>
+            <td><button class="js-btn-taskDelete" data-id="${item.id}">delete</button></td>
+        </tr>
+        `);
+    } else {
+      $(".js-tbody-outputCompleted").append(`
+        <tr>
+            <td>${item.task}</td>
+            <td><button class="js-btn-taskComplete" data-id="${item.id}" data-complete="${item.completed}">undo</button></td>
+            <td><button class="js-btn-taskDelete" data-id="${item.id}">delete</button></td>
+        </tr>
+        `);
+    }
   }
 }
 

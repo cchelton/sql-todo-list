@@ -11,7 +11,7 @@
   <body>
     <div>
       <header>
-        <h1>TODO LIST</h1>
+        <h1>TO-DO List</h1>
       </header>
       <div>
         <label
@@ -21,19 +21,20 @@
             placeholder="enter task here"
           /><button class="js-btn-addTask">submit</button></label
         >
+
         <table>
           <thead>
-            <th colspan="3">Task</th>
+            <th colspan="3">Tasks:</th>
           </thead>
-          <tbody class="js-tbody-outputTasks">
-            <tr>
-              <td>testTaskHTML</td>
-            </tr>
-          </tbody>
+          <tbody class="js-tbody-outputTasks"></tbody>
         </table>
-        <!-- <ul class="js-ul-outputTasks">
-          <li>Test Task</li>
-        </ul> -->
+
+        <table>
+          <thead>
+            <th colspan="2">Completed Tasks:</th>
+          </thead>
+          <tbody class="js-tbody-outputCompleted"></tbody>
+        </table>
       </div>
     </div>
   </body>
