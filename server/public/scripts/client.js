@@ -97,6 +97,7 @@ function addTaskToDB(task) {
     .then((response) => {
       console.log(response);
       getTasksFromDB();
+      $(".js-input-addTask").val(""); //  reset input on successful add
     })
     .catch((err) => {
       console.log(`ERROR ADDING TASK: ${err}`);
@@ -155,9 +156,16 @@ function renderTasks() {
   $(".js-tbody-outputCompleted").empty();
 
   if (checkForCompletedTasks()) {
+    // hide the completed table if there no task is complete
     $(".js-table-completedTasks").removeClass("hidden");
   } else {
     $(".js-table-completedTasks").addClass("hidden");
+  }
+
+  if (checkAllTasksComplete()) {
+    $(".js-table-tasks").addClass("hidden");
+  } else {
+    $(".js-table-tasks").removeClass("hidden");
   }
 
   for (let item of tasks) {
@@ -202,10 +210,22 @@ function checkInputField() {
  */
 function checkForCompletedTasks() {
   whatsCompleted();
-  if (completedTasks.length === 0) {
-    return false;
+  if (completedTasks.length) {
+    return true;
   }
-  return true;
+  return false;
+}
+
+/**
+ * Checks to see if all the tasks are complete.
+ * @returns bool. True if all tasks are completed.
+ */
+function checkAllTasksComplete() {
+  whatsCompleted();
+  if (completedTasks.length === tasks.length) {
+    return true;
+  }
+  return false;
 }
 
 /**
