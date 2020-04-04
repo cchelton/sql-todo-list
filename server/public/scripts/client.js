@@ -118,8 +118,12 @@ function deleteTask(id) {
 function renderTasks() {
   $(".js-ul-outputTasks").empty();
   for (let item of tasks) {
-    $(".js-ul-outputTasks").append(`
-    <li>${item.task}  COMPLETE: ${item.completed}</li>
+    $(".js-tbody-outputTasks").append(`
+    <tr>
+        <td>${item.task}</td>
+        <td><button class="js-btn-taskComplete" data-id="${item.id} data-complete="${item.completed}">complete</button></td>
+        <td><button class="js-btn-taskDelete" data-id="${item.id}">delete</button></td>
+    </tr>
     `);
   }
 }
