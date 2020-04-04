@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../modules/pool");
 
-// GET  --gets tasks from DB. Has url param to sort
+// GET      --gets tasks from DB. Has url param to sort
 router.get("/:sortBy?", (req, res) => {
   const sortBy = req.params.sortBy;
   let queryText = "";
@@ -23,7 +23,7 @@ router.get("/:sortBy?", (req, res) => {
   }
 });
 
-//  POST  --inserts new task to DB
+//  POST    --inserts new task to DB
 router.post("/", (req, res) => {
   const taskData = req.body;
   console.log(taskData);
@@ -39,6 +39,43 @@ router.post("/", (req, res) => {
     })
     .catch((err) => {
       console.log(`POST ERROR: ${err}`);
+      res.sendStatus(500);
+    });
+});
+
+//  PUT     --toggles task complete
+router.put("/:id", (req, res) => {
+  const taskID = req.params.id;
+  const completed = req.body.completed; //boolean
+  const queryText = `UPDATE "tasks"
+    SET "completed" = $1
+    WHERE "id" = $2;`;
+
+  pool
+    .query(queryText, [completed, taskID])
+    .then((dbRes) => {
+      console.log(dbRes);
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(`PUT ERROR: ${err}`);
+      res.sendStatus(500);
+    });
+});
+
+//  DELETE  --deletes task
+router.delete("/:id", (req, res) => {
+  const taskID = req.params.id;
+  const queryText = `DELETE FROM "tasks" WHERE "id" = $1;`;
+
+  pool
+    .query(queryText, [taskID])
+    .then((dbRes) => {
+      console.log(dbRes);
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(`DELETE ERROR: ${err}`);
       res.sendStatus(500);
     });
 });
