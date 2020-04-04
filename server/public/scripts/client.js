@@ -6,6 +6,12 @@ $(document).ready(() => {
   getTasksFromDB();
 
   $(".js-btn-addTask").on("click", clickAddBtn);
+  $(".js-tbody-outputTasks").on(
+    "click",
+    ".js-btn-taskComplete",
+    clickCompleteBtn
+  );
+  $(".js-tbody-outputTasks").on("click", ".js-btn-taskDelete", clickDeleteBtn);
 });
 
 //
@@ -20,10 +26,23 @@ let sortBy = "";
 //
 
 function clickAddBtn() {
-  console.log("clicked add button");
-  const task = $(".js-input-addTask").val();
-  addTaskToDB(task);
+  let task = "";
+  if (checkInputField()) {
+    task = $(".js-input-addTask").val();
+    addTaskToDB(task);
+  } else {
+    alert(`Please enter a task.`);
+  }
 }
+
+function clickCompleteBtn() {
+  const id = $(this).data("id");
+  const completed = $(this).data("complete");
+
+  completeTask(id, completed);
+}
+
+function clickDeleteBtn() {}
 
 //
 //  SERVER API INTERACTIONS
@@ -108,6 +127,7 @@ function deleteTask(id) {
       console.log(err);
     });
 }
+
 //
 //  DOM OUTPUTS
 //
@@ -116,12 +136,12 @@ function deleteTask(id) {
  * Renders tasks as li in ul.
  */
 function renderTasks() {
-  $(".js-ul-outputTasks").empty();
+  $(".js-tbody-outputTasks").empty();
   for (let item of tasks) {
     $(".js-tbody-outputTasks").append(`
     <tr>
         <td>${item.task}</td>
-        <td><button class="js-btn-taskComplete" data-id="${item.id} data-complete="${item.completed}">complete</button></td>
+        <td><button class="js-btn-taskComplete" data-id="${item.id}" data-complete="${item.completed}">complete</button></td>
         <td><button class="js-btn-taskDelete" data-id="${item.id}">delete</button></td>
     </tr>
     `);
@@ -131,3 +151,14 @@ function renderTasks() {
 //
 //  FUNCTIONS
 //
+
+/**
+ * Checks for input in the add task field.
+ * @returns bool. True if field has input.
+ */
+function checkInputField() {
+  if ($(".js-input-addTask").val()) {
+    return true;
+  }
+  return false;
+}
