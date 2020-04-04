@@ -39,6 +39,9 @@ function getTasksFromDB() {
     });
 }
 
+/**
+ * Inserts a task to the database.
+ */
 function addTaskToDB() {
   const testTask = {
     task: "DOM TEST TASK",
@@ -58,6 +61,28 @@ function addTaskToDB() {
     });
 }
 
+/**
+ * Inverts the completed status of an item in the database.
+ * @param {number} id The ID of the task in the database
+ * @param {*} currentComplete The current completed state of the task in database. This will be inverted.
+ */
+function completeTask(id, currentComplete) {
+  const taskComplete = { completed: !currentComplete }; // toggle the complete state of task
+
+  $.ajax({
+    method: "PUT",
+    url: `/tasks/${id}`,
+    data: taskComplete,
+  })
+    .then((response) => {
+      console.log(response);
+      getTasksFromDB();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 //
 //  DOM OUTPUTS
 //
@@ -69,7 +94,7 @@ function renderTasks() {
   $(".js-ul-outputTasks").empty();
   for (let item of tasks) {
     $(".js-ul-outputTasks").append(`
-    <li>${item.task}</li>
+    <li>${item.task}  COMPLETE: ${item.completed}</li>
     `);
   }
 }
