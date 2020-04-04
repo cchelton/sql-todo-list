@@ -4,6 +4,8 @@ $(document).ready(() => {
   console.log(`jq on`);
 
   getTasksFromDB();
+
+  $(".js-btn-addTask").on("click", clickAddBtn);
 });
 
 //
@@ -16,6 +18,12 @@ let sortBy = "";
 //
 //  EVENT HANDLERS
 //
+
+function clickAddBtn() {
+  console.log("clicked add button");
+  const task = $(".js-input-addTask").val();
+  addTaskToDB(task);
+}
 
 //
 //  SERVER API INTERACTIONS
@@ -42,15 +50,15 @@ function getTasksFromDB() {
 /**
  * Inserts a task to the database.
  */
-function addTaskToDB() {
-  const testTask = {
-    task: "DOM TEST TASK",
+function addTaskToDB(task) {
+  const newTask = {
+    task: task,
   };
 
   $.ajax({
     method: "POST",
     url: "/tasks",
-    data: testTask,
+    data: newTask,
   })
     .then((response) => {
       console.log(response);
@@ -66,8 +74,8 @@ function addTaskToDB() {
  * @param {number} id The ID of the task in the database
  * @param {*} currentComplete The current completed state of the task in database. This will be inverted.
  */
-function completeTask(id, currentComplete) {
-  const taskComplete = { completed: !currentComplete }; // toggle the complete state of task
+function completeTask(id, completed) {
+  const taskComplete = { completed: !completed }; // toggle the complete state of task
 
   $.ajax({
     method: "PUT",
