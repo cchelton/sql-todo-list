@@ -42,7 +42,11 @@ function clickCompleteBtn() {
   completeTask(id, completed);
 }
 
-function clickDeleteBtn() {}
+function clickDeleteBtn() {
+  const id = $(this).data("id");
+
+  deleteTask(id);
+}
 
 //
 //  SERVER API INTERACTIONS
