@@ -29,6 +29,7 @@ $(document).ready(() => {
 //
 
 let tasks = [];
+let completedTasks = [];
 let sortBy = "";
 
 //
@@ -152,6 +153,13 @@ function deleteTask(id) {
 function renderTasks() {
   $(".js-tbody-outputTasks").empty();
   $(".js-tbody-outputCompleted").empty();
+
+  if (checkForCompletedTasks()) {
+    $(".js-table-completedTasks").removeClass("hidden");
+  } else {
+    $(".js-table-completedTasks").addClass("hidden");
+  }
+
   for (let item of tasks) {
     if (!item.completed) {
       $(".js-tbody-outputTasks").append(`
@@ -186,4 +194,23 @@ function checkInputField() {
     return true;
   }
   return false;
+}
+
+/**
+ * Checks to see if there are any completed tasks.
+ * @returns bool. True if there are completed tasks.
+ */
+function checkForCompletedTasks() {
+  whatsCompleted();
+  if (completedTasks.length === 0) {
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Checks through the tasks array and updates the array of only completed items.
+ */
+function whatsCompleted() {
+  completedTasks = tasks.filter((task) => task.completed === true);
 }
