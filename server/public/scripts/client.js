@@ -83,6 +83,23 @@ function completeTask(id, currentComplete) {
     });
 }
 
+/**
+ * Deletes a task from the database.
+ * @param {number} id The ID of the task in the database.
+ */
+function deleteTask(id) {
+  $.ajax({
+    method: "DELETE",
+    url: `/tasks/${id}`,
+  })
+    .then((response) => {
+      console.log(response);
+      getTasksFromDB();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 //
 //  DOM OUTPUTS
 //
