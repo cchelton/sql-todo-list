@@ -4,23 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SQL To-Do List</title>
+    <link rel="stylesheet" href="styles/normalize.css" />
     <link rel="stylesheet" href="styles/style.css" />
     <script src="vendors/jquery.min.js" type="text/javascript"></script>
     <script src="scripts/client.js" type="text/javascript"></script>
   </head>
   <body>
-    <div>
+    <div class="container">
       <header>
         <h1>TO-DO List</h1>
       </header>
-      <div>
-        <label
-          >Add a Task:
-          <input
-            class="js-input-addTask"
-            placeholder="enter task here"
-          /><button class="js-btn-addTask">submit</button></label
-        >
+      <div class="containerTables">
+        <div class="todoHeader">
+          <label
+            ><strong>Add a Task:</strong>
+            <input class="js-input-addTask" placeholder="enter task here"
+          /></label>
+          <button class="js-btn-addTask submitBtn complete">submit</button>
+        </div>
 
         <table class="js-table-tasks">
           <thead>

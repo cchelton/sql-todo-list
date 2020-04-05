@@ -173,16 +173,16 @@ function renderTasks() {
       $(".js-tbody-outputTasks").append(`
         <tr>
             <td>${item.task}</td>
-            <td><button class="js-btn-taskComplete" data-id="${item.id}" data-complete="${item.completed}">complete</button></td>
-            <td><button class="js-btn-taskDelete" data-id="${item.id}">delete</button></td>
+            <td><button class="js-btn-taskComplete complete" data-id="${item.id}" data-complete="${item.completed}">complete</button></td>
+            <td><button class="js-btn-taskDelete delete" data-id="${item.id}">delete</button></td>
         </tr>
         `);
     } else {
       $(".js-tbody-outputCompleted").append(`
         <tr>
             <td>${item.task}</td>
-            <td><button class="js-btn-taskComplete" data-id="${item.id}" data-complete="${item.completed}">undo</button></td>
-            <td><button class="js-btn-taskDelete" data-id="${item.id}">delete</button></td>
+            <td><button class="js-btn-taskComplete undo" data-id="${item.id}" data-complete="${item.completed}">undo</button></td>
+            <td><button class="js-btn-taskDelete delete" data-id="${item.id}">delete</button></td>
         </tr>
         `);
     }

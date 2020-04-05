@@ -1,7 +1,82 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 th {
   text-align: left;
+  font-size: 1.2rem;
+}
+
+td {
+  text-align: left;
+}
+
+h1 {
+  margin: 0;
+  padding: 3% 0;
+  margin-bottom: 15px;
+}
+
+header {
+  background-color: steelblue;
+  box-shadow: rgb(146, 146, 146) 0 3px 7px;
+  color: rgb(245, 245, 245);
+}
+
+button {
+  padding: 7px;
+  border-radius: 3.5px;
+}
+
+input {
+  padding: 7px;
+  border-radius: 3.5px;
 }
 
 .hidden {
   display: none;
+}
+
+.container {
+  text-align: center;
+}
+
+.containerTables {
+  display: inline-block;
+  min-height: 50vh;
+  background-color: rgb(213, 224, 238);
+  box-shadow: rgb(146, 146, 146) 0 3px 7px;
+}
+
+.containerTables > table {
+  margin: 0 auto 5px 5px;
+}
+
+.todoHeader {
+  padding: 3% 5%;
+  background-color: lightsteelblue;
+}
+
+.todoHeader > label {
+  font-size: 1.3rem;
+  width: 100%;
+  display: block;
+}
+
+.submitBtn {
+  margin: 5px;
+  font-size: 1.3rem;
+  padding: 7px 15px;
+}
+
+.complete {
+  background-color: rgb(210, 255, 217);
+}
+
+.delete {
+  background-color: rgb(255, 202, 202);
+}
+
+.undo {
+  background-color: rgb(202, 194, 255);
 }
