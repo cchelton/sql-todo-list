@@ -1,8 +1,4 @@
-console.log(`js on`);
-
 $(document).ready(() => {
-  console.log(`jq on`);
-
   getTasksFromDB();
 
   $(".js-btn-addTask").on("click", clickAddBtn);
@@ -72,7 +68,6 @@ function getTasksFromDB() {
     url: `/tasks/${sortBy}`,
   })
     .then((response) => {
-      console.log(response);
       tasks = response;
       renderTasks();
     })
@@ -95,7 +90,6 @@ function addTaskToDB(task) {
     data: newTask,
   })
     .then((response) => {
-      console.log(response);
       getTasksFromDB();
       $(".js-input-addTask").val(""); //  reset input on successful add
     })
@@ -118,7 +112,6 @@ function completeTask(id, completed) {
     data: taskComplete,
   })
     .then((response) => {
-      console.log(response);
       getTasksFromDB();
     })
     .catch((err) => {
@@ -136,7 +129,6 @@ function deleteTask(id) {
     url: `/tasks/${id}`,
   })
     .then((response) => {
-      console.log(response);
       getTasksFromDB();
     })
     .catch((err) => {
